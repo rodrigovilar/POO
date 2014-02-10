@@ -35,8 +35,12 @@ public class Jogo {
 	public boolean isPecaNaPosicao(int linha, int coluna) {
 		return tabuleiro[linha][coluna] == true;
 	}
+
+	
+	
+		
+	}
 	
 	
 	
 
-}

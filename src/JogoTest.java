@@ -5,13 +5,9 @@ import org.junit.Test;
 
 
 public class JogoTest {
+	//todos os 7 testes passaram.
 	
-	private Jogo jogo;
-	
-	@Before 
-	public void iniciar() {
-	jogo = new Jogo();
-	}
+	Jogo jogo = new Jogo();
 	
 	@Test
 	public void criaJogo() {
@@ -50,4 +46,10 @@ public class JogoTest {
 		jogo.setJogador(true);
 		jogo.colocarPeca(20, 1);
 	}
+	
+
+	
+	
+	
+	
 }
