@@ -5,6 +5,8 @@ public class Jogo {
 	private int contNaviuDeUmCano = 0;
 	private static int MAX_NAVIU_DE_DOIS_CANOS = 3;
 	private int contNaviuDeDoisCanos = 0;
+	private static int MAX_NAVIU_DE_TRES_CANOS = 2;
+	private int contNaviuDeTresCanos = 0;
 	
 	private boolean jogadorDaVez;
 	private Boolean[][] tabuleiro = new Boolean[10][10];
@@ -70,6 +72,22 @@ public class Jogo {
 			colocarPeca(linha + 1, coluna);
 			contNaviuDeDoisCanos++;
 		}
+	}
+
+	public void colocarNaviuDeTresCanos(int linha, int coluna, String direcao) {
+		colocarPeca(linha, coluna);
+		if (contNaviuDeTresCanos == MAX_NAVIU_DE_TRES_CANOS) {
+			throw new ExcecaoBatalhaNaval("Numero máximo de naviu de três canos é 2.");
+		}
+		if (direcao.equals("horizontal")) {
+			colocarPeca(linha, coluna + 1);
+			colocarPeca(linha, coluna + 2);
+			contNaviuDeTresCanos++;
+		} else if (direcao.equals("vertical")) {
+			colocarPeca(linha + 1, coluna);
+			colocarPeca(linha + 2, coluna);
+			contNaviuDeTresCanos++;
+		} 
 	}
 	
 }

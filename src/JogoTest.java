@@ -70,7 +70,7 @@ public class JogoTest {
 		assertTrue("esperava naviu de um cano na posicao 0,1", jogo.isPecaNaPosicao(0, 1));
 	}
 	@Test (expected=ExcecaoBatalhaNaval.class)
-	public void colocarNaviusDeUmCanoAlemDoLimiteDeQuatro() {
+	public void colocarNaviusDeUmCanoAlemDoMaximoDeQuatro() {
 		jogo.setJogador(true);
 		jogo.colocarNaviuDeUmCano(0, 1);
 		jogo.colocarNaviuDeUmCano(0, 2);
@@ -91,21 +91,52 @@ public class JogoTest {
 		assertTrue("esperava peca na posicao (0, 1) e (1,1)", jogo.isPecaNaPosicao(0, 1) && jogo.isPecaNaPosicao(1, 1));
 	}
 	@Test (expected=ExcecaoBatalhaNaval.class)
-	public void colocarNaviuDeDoisCanosHorizontalNaUltimaColuna() {
+	public void colocarNaviuDeDoisCanosHorizontalNaUltimaLinha() {
 		jogo.setJogador(true);
 		jogo.colocarNaviuDeDoisCanos(0, 9, "horizontal");
 	}
 	@Test (expected=ExcecaoBatalhaNaval.class)
-	public void colocarNaviuDeDoisCanosVerticalNaUltimaLinha() {
+	public void colocarNaviuDeDoisCanosVerticalNaUltimaColuna() {
 		jogo.setJogador(true);
-		jogo.colocarNaviuDeDoisCanos(9, 0, "vertical");
+		jogo.colocarNaviuDeDoisCanos(9, 9, "vertical");
 	}
 	@Test (expected=ExcecaoBatalhaNaval.class)
-	public void colocarNaviusDeDoisCanosAlemDoLimiteDeTres() {
+	public void colocarNaviusDeDoisCanosAlemDoMaximoDeTres() {
 		jogo.setJogador(true);
 		jogo.colocarNaviuDeDoisCanos(0, 0, "horizontal");
 		jogo.colocarNaviuDeDoisCanos(2, 2, "vertical");
 		jogo.colocarNaviuDeDoisCanos(4, 4, "horizontal");
 		jogo.colocarNaviuDeDoisCanos(6, 6, "vertical");
+	}
+	@Test
+	public void colocarNaviuDeTresCanosNaHorizontal() {
+		jogo.setJogador(true);
+		jogo.colocarNaviuDeTresCanos(0, 0, "horizontal");
+		assertTrue("esperava peca na posicao (0, 0), (0, 1) e (0, 2)", jogo.isPecaNaPosicao(0, 0) 
+				&& jogo.isPecaNaPosicao(0, 1) && jogo.isPecaNaPosicao(0, 2));
+	}
+	@Test
+	public void colocarNaviuDeTresCanosNaVertical() {
+		jogo.setJogador(true);
+		jogo.colocarNaviuDeTresCanos(0, 0, "vertical");
+		assertTrue("esperava peca na posicao (0, 0), (1, 0) e (2, 0)", jogo.isPecaNaPosicao(0, 0) 
+				&& jogo.isPecaNaPosicao(1, 0) && jogo.isPecaNaPosicao(2, 0));
+	}
+	@Test (expected=ExcecaoBatalhaNaval.class)
+	public void colocarNaviuDeTresCanosHorizontalNaPenultimaLinha() {
+		jogo.setJogador(true);
+		jogo.colocarNaviuDeTresCanos(8, 8, "horizontal");
+	}
+	@Test (expected=ExcecaoBatalhaNaval.class)
+	public void colocarNaviuDeTresCanosVerticalNaPenultimaColuna() {
+		jogo.setJogador(true);
+		jogo.colocarNaviuDeTresCanos(8, 8, "vertical");
+	}
+	@Test (expected=ExcecaoBatalhaNaval.class)
+	public void colocarNaviusDeDoisCanosAlemDoMaximoDeDois() {
+		jogo.setJogador(true);
+		jogo.colocarNaviuDeTresCanos(0, 0, "horizontal");
+		jogo.colocarNaviuDeTresCanos(1, 0, "horizontal");
+		jogo.colocarNaviuDeTresCanos(3, 0, "horizontal");
 	}	
 }
