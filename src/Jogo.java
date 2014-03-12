@@ -1,8 +1,14 @@
 
 public class Jogo {
 	
-	private Boolean jogadorDaVez;
+	private static int MAX_NAVIU_DE_UM_CANO = 4;
+	private int contNaviuDeUmCano = 0;
+	private static int MAX_NAVIU_DE_DOIS_CANOS = 3;
+	private int contNaviuDeDoisCanos = 0;
+	
+	private boolean jogadorDaVez;
 	private Boolean[][] tabuleiro = new Boolean[10][10];
+	
 
 	public boolean acabou() {
 		// TODO Auto-generated method stub
@@ -19,13 +25,7 @@ public class Jogo {
 	}
 
 	public void colocarPeca(int linha, int coluna) {
-
-		if (coluna < 0 || coluna > 9) {
-			throw new ExcecaoBatalhaNaval("coluna fora da faixa permitida");
-		}
-		if (linha < 0 || linha > 9) {
-			throw new ExcecaoBatalhaNaval("linha fora da faixa permitida");
-		}
+		verificarLimites(linha, coluna);
 		if (tabuleiro[linha][coluna] != null) {
 			throw new ExcecaoBatalhaNaval("Celula ocupada");
 		}
@@ -33,14 +33,47 @@ public class Jogo {
 	}
 
 	public boolean isPecaNaPosicao(int linha, int coluna) {
+		verificarLimites(linha, coluna);
+		if (tabuleiro[linha][coluna] == null) {
+			throw new ExcecaoBatalhaNaval("Celula Vazia");
+		}
 		return tabuleiro[linha][coluna] == true;
 	}
 
-	
-	
-		
+	private void verificarLimites(int linha, int coluna) {
+		if (linha < 0 || linha > 9) {
+			throw new ExcecaoBatalhaNaval("Linha fora da faixa permitida");
+		}
+		if (coluna < 0 || coluna > 9) {
+			throw new ExcecaoBatalhaNaval("Coluna fora da faixa permitida");
+		}
 	}
 	
+	public void colocarNaviuDeUmCano(int linha, int coluna) {
+		
+		if (contNaviuDeUmCano == MAX_NAVIU_DE_UM_CANO) {
+			throw new ExcecaoBatalhaNaval("Numero máximo de naviu de um cano é 4.");
+		}
+		colocarPeca(linha, coluna);
+		contNaviuDeUmCano++;
+	}
+
+	public void colocarNaviuDeDoisCanos(int linha, int coluna, String direcao) {
+		colocarPeca(linha, coluna);
+		if (contNaviuDeDoisCanos == MAX_NAVIU_DE_DOIS_CANOS) {
+			throw new ExcecaoBatalhaNaval("Numero máximo de naviu de dois canos é 3.");
+		}
+		if(direcao.equals("horizontal")) {
+			colocarPeca(linha, coluna + 1);
+			contNaviuDeDoisCanos++;
+		} else if (direcao.equals("vertical")) {
+			colocarPeca(linha + 1, coluna);
+			contNaviuDeDoisCanos++;
+		}
+	}
+	
+}
+
 	
 	
 
