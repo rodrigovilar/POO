@@ -1,12 +1,14 @@
 
 public class Jogo {
 	
-	private static int MAX_NAVIU_DE_UM_CANO = 4;
+	private static final int MAX_NAVIU_DE_UM_CANO = 4;
 	private int contNaviuDeUmCano = 0;
-	private static int MAX_NAVIU_DE_DOIS_CANOS = 3;
+	private static final int MAX_NAVIU_DE_DOIS_CANOS = 3;
 	private int contNaviuDeDoisCanos = 0;
-	private static int MAX_NAVIU_DE_TRES_CANOS = 2;
+	private static final int MAX_NAVIU_DE_TRES_CANOS = 2;
 	private int contNaviuDeTresCanos = 0;
+	private static final int MAX_NAVIU_DE_QUATRO_CANOS = 1;
+	private int contNaviuDeQuatroCanos = 0;
 	
 	private boolean jogadorDaVez;
 	private Boolean[][] tabuleiro = new Boolean[10][10];
@@ -88,6 +90,25 @@ public class Jogo {
 			colocarPeca(linha + 2, coluna);
 			contNaviuDeTresCanos++;
 		} 
+	}
+
+	public void colocarNaviuDeQuatroCanos(int linha, int coluna, String direcao) {
+		colocarPeca(linha,coluna);
+		if (contNaviuDeQuatroCanos == MAX_NAVIU_DE_QUATRO_CANOS) {
+			throw new ExcecaoBatalhaNaval("Numero máximo de naviu de quatro canos é 1");
+		}
+		if (direcao.equals("horizontal")) {
+			colocarPeca(linha, coluna + 1);
+			colocarPeca(linha, coluna + 2);
+			colocarPeca(linha, coluna + 3);
+			contNaviuDeQuatroCanos++;
+		} else if (direcao.equals("vertical")) {
+			colocarPeca(linha + 1, coluna);
+			colocarPeca(linha + 2, coluna);
+			colocarPeca(linha + 3, coluna);
+			contNaviuDeQuatroCanos++;
+		}
+		
 	}
 	
 }
